@@ -1,0 +1,47 @@
+#GRILLO
+
+
+#Instale o Postfix e alguns packages
+sudo apt-get update && sudo apt-get upgrade
+
+#Quando você instala o Postfix pela primeira vez é necessário fazer alguns ajustes. Em General type of mail configuration selecione Internet Site e em System mail name informe um domínio completo e válido (FQDN).
+Configure o Postfix
+sudo apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+
+Abra o arquivo main.cf:
+# vi /etc/postfix/main.cf
+e adicione as seguintes linhas no final do arquivo:
+// host para onde será encaminhada a mensagem
+relayhost = [smtp.gmail.com]:587
+// habilita a autenticação Simple Authentication and Security Layer (SASL)
+smtp_sasl_auth_enable = yes
+// localização do sasl_passwd
+smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
+// desabilita autenticação anônima
+smtp_sasl_security_options = noanonymous
+// localização do certificado CA gerado
+smtp_tls_CAfile = /etc/postfix/cacert.pem
+// habilita o TLS
+smtp_use_tls = yes
+A conta do Gmail e a senha ficarão em um arquivo separado. Crie o arquivo sasl_passwd em /etc/postfix/sasl/.
+// cria o arquivo
+# touch sasl_passwd
+ 
+// abre para edição
+# vi /etc/postfix/sasl/sasl_passwd
+Adicione a seguinte linha para autenticação no host:
+[smtp.gmail.com]:587 SUA_CONTA_DE_EMAIL@gmail.com:SUA_SENHA
+Corrija as permissões e atualize o Postfix para usar sasl_passwd
+# sudo chmod 400 /etc/postfix/sasl/sasl_passwd
+# sudo postmap /etc/postfix/sasl/sasl_passwd
+Valide o certificado
+Dica: O comando tee permite que a saída de um comando (cat…) seja gravada em um arquivo (cacert.pem) ao mesmo tempo em que é exibida na tela.
+# cat /etc/ssl/certs/thawte_Primary_Root_CA.pem | sudo tee -a /etc/postfix/cacert.pem
+Reinicie o Postfix
+# sudo /etc/init.d/postfix reload
+Teste
+# echo "E-mail de teste" | mail -s "Assunto: Teste" sua_conta@exemplo.com.br
+Pronto.
+
+De <https://www.linhadecomando.com/so-linux/linux-configurando-o-postfix-para-usar-o-smtp-do-gmail-no-ubuntu-16-04> 
+
