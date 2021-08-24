@@ -47,6 +47,22 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK)
     
 }
 
+
+#Cria Pastas
+Function GenerateFolder($path) {
+    $global:foldPath = $null
+    foreach($foldername in $path.split("\")) {
+        $global:foldPath += ($foldername+"\")
+        if (!(Test-Path $global:foldPath)){
+            New-Item -ItemType Directory -Path $global:foldPath
+            
+        }
+    }
+}
+
+
+
+
 #imput Dados Grupos
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -112,6 +128,6 @@ if ($null -ne $list_group) {
         $groupobj = $list_group[$i].ObjectId
         $GroupName = $list_group[$i].DisplayName
         Get-AzureADGroupMember -ObjectId $groupobj -All $true  |  Select-Object DisplayName, UserPrincipalName, department, mail, physicalDeliveryOfficeName, title |
-        export-CSV $disc"GroupMembers_$GroupName.csv" -NoTypeInformation -Encoding UTF8
+        export-CSV GenerateFolder $disc"GroupMembers_$GroupName.csv" -NoTypeInformation -Encoding UTF8
     }}
     
