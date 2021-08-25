@@ -61,8 +61,6 @@ Function GenerateFolder($path) {
 }
 
 
-
-
 #imput Dados Grupos
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -119,7 +117,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK)
 
 
 #EXECUÇÃO DO COMANDO - NAO ALTERAR
-
+GenerateFolder $disc
 $list_group = Get-AzureADGroup -SearchString "$groupimput" #PROCURA TODOS GRUPOS COM NOME
 #$list_group = Get-AzureADGroup -Filter "DisplayName eq '$GroupName'" #PROCURA POR UM GRUPO
 
@@ -128,6 +126,5 @@ if ($null -ne $list_group) {
         $groupobj = $list_group[$i].ObjectId
         $GroupName = $list_group[$i].DisplayName
         Get-AzureADGroupMember -ObjectId $groupobj -All $true  |  Select-Object DisplayName, UserPrincipalName, department, mail, physicalDeliveryOfficeName, title |
-        export-CSV GenerateFolder $disc"GroupMembers_$GroupName.csv" -NoTypeInformation -Encoding UTF8
+        export-CSV $disc"\GroupMembers_$GroupName.csv" -NoTypeInformation -Encoding UTF8
     }}
-    
