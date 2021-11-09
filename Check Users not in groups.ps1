@@ -4,6 +4,12 @@ $groupids = @("222f0282-faa6-466b-8721-b546485ea6eb", "4a45259f-c5e0-4c06-bc83-3
 $userht = @{}
 Get-AzureADUser -all $true | foreach-object {$userht.Add($_.ObjectId,$_)} 
 ForEach($id  in  $groupids){
-Get-AzureADUserMembership -all $true -ObjectId $id | foreach-object { $userht.Remove($_.ObjectId) }
+$groups = Get-AzureADGroupMember -all $true -ObjectId $id | foreach-object { $userht.Remove($_.ObjectId) }
 }
 $userht.Values | Select-Object DisplayName, UserPrincipalName, mail | export-CSV "c:\temp\GroupMembers.csv" -NoTypeInformation -Encoding UTF8
+
+
+
+#Get-AzureADUser -Top 100
+#Get-AzureADUserMembership -ObjectId 15c9fa3d-e881-4c5d-a210-83a3be8d15bf
+#Get-AzureADGroupMember -ObjectId 441f1198-b690-466f-9ecd-b23a2fa03646
