@@ -1,6 +1,6 @@
-#$M365credentials = Get-Credential
-#Connect-MsolService -Credential $M365credentials
-#Connect-AzureAD -Credential $M365credentials
+$M365credentials = Get-Credential
+Connect-MsolService -Credential $M365credentials
+Connect-AzureAD -Credential $M365credentials
 
 Function Export-UsersLicensesConfig {
 
