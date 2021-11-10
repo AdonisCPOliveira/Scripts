@@ -4,7 +4,7 @@
 
 Function Export-UsersLicensesConfig {
 
-    #License Plans correspondence table with friendly name
+    #License Plans correspondence table with friendly name, please set companyname where is "reseller account"
     
     $LicensePlan = @{         
               ##<companyname>:<Licenseplan> = <license plan friendly name>          
