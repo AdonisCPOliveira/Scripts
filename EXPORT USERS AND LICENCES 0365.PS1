@@ -1,6 +1,6 @@
-$M365credentials = Get-Credential
-Connect-MsolService -Credential $M365credentials
-Connect-AzureAD -Credential $M365credentials
+#$M365credentials = Get-Credential
+#Connect-MsolService -Credential $M365credentials
+#Connect-AzureAD -Credential $M365credentials
 
 Function Export-UsersLicensesConfig {
 
@@ -69,5 +69,6 @@ Function Export-UsersLicensesConfig {
     }
 
     #Exporting user License config    
-    $Us | Select userPrincipalName, O365Licenses, EnabledFeature, DisabledFeature | Export-Csv UserLicensesConfig.csv -NoTypeInformation -Delimiter ";" -Encoding UTF8
+    $Us | Select userPrincipalName, O365Licenses, EnabledFeature, DisabledFeature #| Export-Csv d:\temp\UserLicensesConfig.csv -NoTypeInformation -Delimiter ";" -Encoding UTF8
 }
+Export-UsersLicensesConfig
