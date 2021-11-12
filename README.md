@@ -16,3 +16,8 @@ Connect to Azure AD:
 $Msolcred = Get-credential
 Connect-MsolService -Credential $MsolCred
 connect-AzureAD -Credential $MsolCred 
+
+#faz login no Exchange
+$Cred = Get-Credential
+$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell/ -Credential $Cred -Authentication Basic -AllowRedirection
+Import-PSSession $Session
