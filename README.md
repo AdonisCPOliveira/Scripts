@@ -5,6 +5,7 @@ Para os Scripts do PowerShell funcionar instalar os seguintes Modulos:
 
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
 Import-Module PowerShellGe
 
 
