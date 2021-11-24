@@ -31,6 +31,7 @@ Function Export-UsersLicensesConfig {
                 "reseller-account:VISIOONLINE_PLAN1" = "Visio Online Plan 1"           
               "reseller-account:WACONEDRIVESTANDARD" = "OneDrive For Business Plan 1"       
                       "reseller-account:WIN_DEF_ATP" = "Windows Defender Avanced Threat Protection"
+                "reseller-account:TEAMS_EXPLORATORY" = "Microsoft Teams Exploratory"
     }
     
     #Initializing users licenses config table
