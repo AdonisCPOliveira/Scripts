@@ -3,6 +3,11 @@ Meus Scripts
 
 Para os Scripts do PowerShell funcionar instalar os seguintes Modulos:
 
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+Import-Module PowerShellGe
+
+
 Exchange Online V2:
 Install-Module -Name ExchangeOnlineManagement -RequiredVersion 2.0.5
 
