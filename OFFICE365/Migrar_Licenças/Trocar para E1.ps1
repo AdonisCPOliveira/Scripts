@@ -23,12 +23,12 @@ foreach($u in $lista){
     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*ENTERPRISEPACK*" ){
 
         Set-MsolUserLicense -UserPrincipalName $user -RemoveLicenses "reseller-account:ENTERPRISEPACK"
-        echo "licença E3 Removida"
+        echo "licença E3 do(a) $user Removida"
     }
     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*DESKLESSPACK*" ){
         
         Set-MsolUserLicense -UserPrincipalName $user -RemoveLicenses "reseller-account:DESKLESSPACK"
-        echo "licença F3 Removida"
+        echo "licença F3 do(a) $user Removida"
     }   
           
     Set-MsolUserLicense -UserPrincipalName $user -AddLicenses "reseller-account:STANDARDPACK"
