@@ -1,4 +1,4 @@
-﻿##
+##
 ## 
 ## Script para alteração de licença em massa
 ##	remove E3 e F3 E1 TEAMS e Desabilita as contas
@@ -31,14 +31,14 @@ foreach($u in $lista){
         echo "licença F3 Removida"
     }   
      
-     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*DESKLESSPACK*" ){
+     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*STANDARDPACK*" ){
         
         Set-MsolUserLicense -UserPrincipalName $user -RemoveLicenses "reseller-account:STANDARDPACK"
         echo "licença E1 Removida"
     }   
 
     
-     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*DESKLESSPACK*" ){
+     if ((Get-MsolUser -UserPrincipalName $user | Select -ExpandProperty Licenses | Select-Object accountskuid) -like "*TEAMS_EXPLORATORY*" ){
         
         Set-MsolUserLicense -UserPrincipalName $user -RemoveLicenses "reseller-account:TEAMS_EXPLORATORY"
         echo "licença TEAMS Removida"
