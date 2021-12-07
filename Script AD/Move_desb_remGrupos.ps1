@@ -21,6 +21,6 @@ foreach($u in $lista){
     Set-ADUser $get_user_info.SamAccountName -Homepage "Migrado para OU Desativados em: $date_file"
     $groups | Remove-ADGroupMember -Confirm:$false -member $get_user_info.SamAccountName
 
-    echo "Usuario $u.UserPrincipalName Foi Desabilitado, Grupos Removidos e Movido para OU Desativados em $date_file"
+    echo ("Usuario " + $get_user_info.Name +" Foi Desabilitado, Grupos Removidos e Movido para OU Desativados em $date_file")
 
     }
